@@ -2,15 +2,13 @@
 #include <set>
 #include <map>
 #include <vector>
-#include <cstring>
-
 
 using namespace std;
 
 struct Newtype
 {
-    string str;
-    map<char, int> mp;
+    int n;
+    map<long long, int> mp;
 
 };
 
@@ -18,8 +16,13 @@ void input(Newtype *test, int t)
 {
     for(int i = 0; i < t; i++)
     {
-        cin.ignore();
-        getline(cin, test[i].str);
+        cin >> test[i].n;
+        for(int j = 0; j < test[i].n; j++)
+        {
+            long long x; 
+            cin >> x;
+            test[i].mp[x]++;
+        }
     }
 }
 
@@ -27,22 +30,18 @@ void output(Newtype *test, int t)
 {
     for(int i = 0; i < t; i++)
     {
-        for(char x: test[i].str)
-        {
-            test[i].mp[x]++;
-        }
         int max = 0;
-        char chr;
-        for(pair<char, int> p : test[i].mp)
+        int num = 0;
+        for(pair<long long, int> p : test[i].mp)
         {
             if(p.second > max)
             {
                 max = p.second;
-                chr = p.first;
+                num = p.first;
             }
 
         }
-        cout << chr << " " << max << endl;
+        cout << num << " " << max << endl;
     }
 }
 int main()

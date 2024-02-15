@@ -29,6 +29,7 @@ void output(Newtype *test, int t)
     {
         for(char x: test[i].str)
         {
+            
             test[i].mp[x]++;
         }
         int max = 0;

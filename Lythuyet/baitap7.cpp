@@ -3,6 +3,7 @@
 #include <map>
 #include <vector>
 #include <cstring>
+#include <sstream>
 
 
 using namespace std;
@@ -10,7 +11,7 @@ using namespace std;
 struct Newtype
 {
     string str;
-    map<char, int> mp;
+    map<string, int> mp;
 
 };
 
@@ -27,22 +28,23 @@ void output(Newtype *test, int t)
 {
     for(int i = 0; i < t; i++)
     {
-        for(char x: test[i].str)
-        {
-            test[i].mp[x]++;
-        }
+        
+        string tmp;
         int max = 0;
-        char chr;
-        for(pair<char, int> p : test[i].mp)
+        stringstream ss(test[i].str);
+        while(ss >> tmp)
         {
-            if(p.second > max)
-            {
-                max = p.second;
-                chr = p.first;
-            }
-
+            test[i].mp[tmp]++;
         }
-        cout << chr << " " << max << endl;
+        for(auto x: test[i].mp)
+        {
+            if(x.second > max)
+            {
+                tmp = x.first;
+                max = x.second;
+            }
+        }
+        cout << tmp << ": " << max << endl;
     }
 }
 int main()

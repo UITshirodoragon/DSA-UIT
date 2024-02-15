@@ -3,6 +3,7 @@
 #include <map>
 #include <vector>
 #include <cstring>
+#include <sstream>
 
 
 using namespace std;
@@ -10,7 +11,8 @@ using namespace std;
 struct Newtype
 {
     string str;
-    map<char, int> mp;
+    map<string, int> mp;
+    vector<string> v;
 
 };
 
@@ -20,6 +22,16 @@ void input(Newtype *test, int t)
     {
         cin.ignore();
         getline(cin, test[i].str);
+        string tmp;
+        stringstream ss(test[i].str);
+        while(ss >> tmp)
+        {
+            test[i].mp[tmp]++;
+            if(test[i].mp[tmp] >= 2)
+            {
+                test[i].v.push_back(tmp);
+            }
+        }
     }
 }
 
@@ -27,22 +39,8 @@ void output(Newtype *test, int t)
 {
     for(int i = 0; i < t; i++)
     {
-        for(char x: test[i].str)
-        {
-            test[i].mp[x]++;
-        }
-        int max = 0;
-        char chr;
-        for(pair<char, int> p : test[i].mp)
-        {
-            if(p.second > max)
-            {
-                max = p.second;
-                chr = p.first;
-            }
+        cout << test[i].v.at(0) << endl;
 
-        }
-        cout << chr << " " << max << endl;
     }
 }
 int main()

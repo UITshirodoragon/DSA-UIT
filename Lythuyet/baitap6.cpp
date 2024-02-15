@@ -29,20 +29,17 @@ void output(Newtype *test, int t)
     {
         for(char x: test[i].str)
         {
+            x = tolower(x);
             test[i].mp[x]++;
         }
-        int max = 0;
-        char chr;
-        for(pair<char, int> p : test[i].mp)
+        if(test[i].mp.size() == 26)
         {
-            if(p.second > max)
-            {
-                max = p.second;
-                chr = p.first;
-            }
-
+            cout << "YES\n";
         }
-        cout << chr << " " << max << endl;
+        else
+        {
+            cout << "NO\n";
+        }
     }
 }
 int main()
